@@ -42,14 +42,14 @@ while read _ file; do
   frontmatter=$(echo "$filecontent" | awk -v RS='---' 'NR==2{print}')
   draft=$(echo "$frontmatter" | awk '/^draft: /{print $2}')
   if [ "$draft" = "false" ]; then
-    echo "$file modDateTime updated"
-    cat $file | sed "/---.*/,/---.*/s/^modDatetime:.*$/modDatetime: $(date "+%Y-%m-%dT%H:%M:%SZ")/" > tmp
+    echo "$file updatedDate updated"
+    cat $file | sed "/---.*/,/---.*/s/^updatedDate:.*$/updatedDate: $(date "+%Y-%m-%dT%H:%M:%SZ")/" > tmp
     mv tmp $file
     git add $file
   fi
   if [ "$draft" = "first" ]; then
-    echo "First release of $file, draft set to false and modDateTime removed"
-    cat $file | sed "/---.*/,/---.*/s/^modDatetime:.*$/modDatetime:/" | sed "/---.*/,/---.*/s/^draft:.*$/draft: false/" > tmp
+    echo "First release of $file, draft set to false and updatedDate removed"
+    cat $file | sed "/---.*/,/---.*/s/^updatedDate:.*$/updatedDate:/" | sed "/---.*/,/---.*/s/^draft:.*$/draft: false/" > tmp
     mv tmp $file
     git add $file
   fi

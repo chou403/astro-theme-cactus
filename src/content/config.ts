@@ -1,97 +1,38 @@
-import { SITE } from "@config";
 import { defineCollection, z } from "astro:content";
 
-const javaCollection = defineCollection({
-  type: "content",
-  schema: ({ image }) =>
-    z.object({
-      author: z.string().default(SITE.author),
-      pubDatetime: z.date(),
-      modDatetime: z.date().optional().nullable(),
-      title: z.string(),
-      featured: z.boolean().optional(),
-      draft: z.boolean().optional(),
-      tags: z.array(z.string()).default(["others"]),
-      ogImage: image()
-        .refine(img => img.width >= 1200 && img.height >= 630, {
-          message: "OpenGraph image must be at least 1200 X 630 pixels!",
-        })
-        .or(z.string())
-        .optional(),
-      description: z.string(),
-      canonicalURL: z.string().optional(),
-    }),
+function removeDupsAndLowerCase(array: string[]) {
+	if (!array.length) return array;
+	const lowercaseItems = array.map((str) => str.toLowerCase());
+	const distinctItems = new Set(lowercaseItems);
+	return Array.from(distinctItems);
+}
+
+const post = defineCollection({
+	schema: ({ image }) =>
+		z.object({
+			author: z.string().optional(),
+			coverImage: z
+				.object({
+					alt: z.string(),
+					src: image(),
+				})
+				.optional(),
+			description: z.string().optional(),
+			draft: z.boolean().default(false),
+			featured: z.boolean().optional(),
+			ogImage: z.string().optional(),
+			publishDate: z
+				.date()
+				.or(z.date())
+				.transform((val) => new Date(val)),
+			tags: z.array(z.string()).default(["others"]).transform(removeDupsAndLowerCase),
+			title: z.string(),
+			updatedDate: z
+				.date()
+				.optional()
+				.transform((str) => (str ? new Date(str) : undefined)),
+		}),
+	type: "content",
 });
 
-const otherCollection = defineCollection({
-  type: "content",
-  schema: ({ image }) =>
-    z.object({
-      author: z.string().default(SITE.author),
-      pubDatetime: z.date(),
-      modDatetime: z.date().optional().nullable(),
-      title: z.string(),
-      featured: z.boolean().optional(),
-      draft: z.boolean().optional(),
-      tags: z.array(z.string()).default(["others"]),
-      ogImage: image()
-        .refine(img => img.width >= 1200 && img.height >= 630, {
-          message: "OpenGraph image must be at least 1200 X 630 pixels!",
-        })
-        .or(z.string())
-        .optional(),
-      description: z.string(),
-      canonicalURL: z.string().optional(),
-    }),
-});
-
-const toolCollection = defineCollection({
-  type: "content",
-  schema: ({ image }) =>
-    z.object({
-      author: z.string().default(SITE.author),
-      pubDatetime: z.date(),
-      modDatetime: z.date().optional().nullable(),
-      title: z.string(),
-      featured: z.boolean().optional(),
-      draft: z.boolean().optional(),
-      tags: z.array(z.string()).default(["others"]),
-      ogImage: image()
-        .refine(img => img.width >= 1200 && img.height >= 630, {
-          message: "OpenGraph image must be at least 1200 X 630 pixels!",
-        })
-        .or(z.string())
-        .optional(),
-      description: z.string(),
-      canonicalURL: z.string().optional(),
-    }),
-});
-
-const utilCollection = defineCollection({
-  type: "content",
-  schema: ({ image }) =>
-    z.object({
-      author: z.string().default(SITE.author),
-      pubDatetime: z.date(),
-      modDatetime: z.date().optional().nullable(),
-      title: z.string(),
-      featured: z.boolean().optional(),
-      draft: z.boolean().optional(),
-      tags: z.array(z.string()).default(["others"]),
-      ogImage: image()
-        .refine(img => img.width >= 1200 && img.height >= 630, {
-          message: "OpenGraph image must be at least 1200 X 630 pixels!",
-        })
-        .or(z.string())
-        .optional(),
-      description: z.string(),
-      canonicalURL: z.string().optional(),
-    }),
-});
-
-export const collections = {
-  java: javaCollection,
-  other: otherCollection,
-  tool: toolCollection,
-  util: utilCollection,
-};
+export const collections = { post };
