@@ -1,5 +1,5 @@
 {
-	"name": "astro-cactus",
+	"name": "chou401-blog",
 	"version": "4.5.0",
 	"private": false,
 	"scripts": {
@@ -12,6 +12,7 @@
 		"check": "astro check"
 	},
 	"dependencies": {
+		"@astrojs/check": "^0.7.0",
 		"@astrojs/mdx": "2.2.4",
 		"@astrojs/rss": "4.0.5",
 		"@astrojs/sitemap": "3.1.2",
@@ -22,7 +23,8 @@
 		"rehype-external-links": "^3.0.0",
 		"satori": "0.10.13",
 		"satori-html": "^0.3.2",
-		"sharp": "^0.33.2"
+		"sharp": "^0.33.2",
+		"typescript": "^5.4.5"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.5.10",

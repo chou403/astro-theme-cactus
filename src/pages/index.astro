@@ -7,7 +7,7 @@ import PageLayout from "@/layouts/Base.astro";
 const MAX_POSTS = 10;
 const allPosts = await getAllPosts();
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
-const featuredPosts = allPosts.filter((v) => v.data.featured === true);
+const featuredPosts = allPosts.filter((v:any) => v.data.featured === true);
 ---
 
 <PageLayout meta={{ title: "Home" }}>
@@ -16,7 +16,7 @@ const featuredPosts = allPosts.filter((v) => v.data.featured === true);
 		<p class="mb-4">
 			不管前方的路有多苦，只要走的方向正确，不管多么崎岖不平，都比站在原地更接近幸福。
 		</p>
-		<SocialList />
+		<!-- <SocialList /> -->
 	</section>
 	<section aria-label="Blog post list" class="mt-16">
 		<h2 class="title mb-4 text-xl">Recent Posts</h2>
@@ -34,7 +34,7 @@ const featuredPosts = allPosts.filter((v) => v.data.featured === true);
 		<h2 class="title mb-4 text-xl">Featured</h2>
 		<dl class="space-y-4">
 			{
-				featuredPosts.map((p) => (
+				featuredPosts.map((p:any) => (
 					<li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&_q]:col-start-2">
 						<PostPreview post={p} />
 					</li>
