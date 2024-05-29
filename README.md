@@ -10,19 +10,12 @@ Astro Cactus is a simple opinionated starter built with the Astro framework. Use
 ## Table Of Contents
 
 1. [Key Features](#key-features)
-2. [Demo](#demo-💻)
-3. [Quick start](#quick-start)
-4. [Preview](#preview)
-5. [Commands](#commands)
-6. [Configure](#configure)
-7. [Updating](#updating)
-8. [Adding Posts](#adding-posts)
+2. [Commands](#commands)
+3. [Configure](#configure)
+4. [Adding Posts](#adding-posts)
    - [Frontmatter](#frontmatter)
    - [Frontmatter Snippet](#frontmatter-snippet)
-9. [Pagefind search](#pagefind-search)
-10. [Analytics](#analytics)
-11. [Deploy](#deploy)
-12. [Acknowledgment](#acknowledgment)
+5. [Pagefind search](#pagefind-search)
 
 ## Key Features
 
@@ -41,30 +34,6 @@ Astro Cactus is a simple opinionated starter built with the Astro framework. Use
 - [Pagefind](https://pagefind.app/) static search library integration
 - [Astro Icon](https://github.com/natemoo-re/astro-icon) svg icon component
 - [Expressive Code](https://expressive-code.com/) source code and syntax highlighter
-
-## Demo 💻
-
-Check out the [Demo](https://astro-cactus.chriswilliams.dev/), hosted on Netlify
-
-## Quick start
-
-[Create a new repo](https://github.com/chrismwilliams/astro-theme-cactus/generate) from this template.
-
-```bash
-# npm 7+
-npm create astro@latest -- --template chrismwilliams/astro-theme-cactus
-
-# pnpm
-pnpm dlx create-astro --template chrismwilliams/astro-theme-cactus
-```
-
-[![Deploy with Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/chrismwilliams/astro-theme-cactus) [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fchrismwilliams%2Fastro-theme-cactus&project-name=astro-theme-cactus)
-
-## Preview
-
-![Astro Theme Cactus in a light theme mode](https://github.com/chrismwilliams/astro-theme-cactus/assets/12715988/84c89d42-4525-4674-b10c-6d6ebdc06382)
-
-![Astro Theme Cactus in a dark theme mode](https://github.com/chrismwilliams/astro-theme-cactus/assets/12715988/e0e575e2-445f-4c2d-a812-b5b53d2d9031)
 
 ## Commands
 
@@ -98,12 +67,6 @@ Replace pnpm with your choice of npm / yarn
   - You can also create your own og images and skip satori generating it for you by adding an ogImage property in the frontmatter with a link to the asset, an example can be found in `src/content/post/social-image.md`. More info on frontmatter can be found [here](#frontmatter)
 - Optional:
   - Fonts: This theme sets the body element to the font family `font-mono`, located in the global css file `src/styles/global.css`. You can change fonts by removing the variant `font-mono`, after which TailwindCSS will default to the `font-sans` [font family stack](https://tailwindcss.com/docs/font-family).
-
-## Updating
-
-If you've forked the template, you can [sync the fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork) with your own project, remembering to not click Discard Changes as you will lose your own.
-
-If you have a template repository, you can add this template as a remote, as discussed [here](https://stackoverflow.com/questions/56577184/github-pull-changes-from-a-template-repository).
 
 ## Adding posts
 
@@ -139,25 +102,3 @@ It also allows you to filter posts by tags added in the frontmatter of blog post
 If you would rather not include this integration, simply remove the component `src/components/Search.astro`, and uninstall both `@pagefind/default-ui` & `pagefind` from package.json. You will also need to remove the postbuild script from here as well.
 
 You can reduce the initial css payload of your css, as demonstrated [here](https://github.com/chrismwilliams/astro-theme-cactus/pull/145#issue-1943779868), by lazy loading the web components styles.
-
-## Analytics
-
-You may want to track the number of visitors you receive to your blog/website in order to understand trends and popular posts/pages you've created. There are a number of providers out there one could use, including web hosts such as [vercel](https://vercel.com/analytics), [netlify](https://www.netlify.com/products/analytics/), and [cloudflare](https://www.cloudflare.com/web-analytics/).
-
-This theme/template doesn't include a specific solution due to there being a number of use cases and/or options which some people may or may not use.
-
-You may be asked to included a snippet inside the **HEAD** tag of your website when setting it up, which can be found in `src/layouts/Base.astro`. Alternatively, you could add the snippet in `src/components/BaseHead.astro`.
-
-## Deploy
-
-[Astro docs](https://docs.astro.build/en/guides/deploy/) has a great section and breakdown of how to deploy your own Astro site on various platforms and their idiosyncrasies.
-
-By default the site will be built (see [Commands](#commands) section above) to a `/dist` directory.
-
-## Acknowledgment
-
-This theme was inspired by [Hexo Theme Cactus](https://github.com/probberechts/hexo-theme-cactus)
-
-## License
-
-MIT
