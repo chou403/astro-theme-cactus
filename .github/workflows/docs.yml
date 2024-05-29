@@ -7,11 +7,6 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
   release:
     name: Build Docs / astro
