@@ -30,13 +30,7 @@ jobs:
       - name: Get pnpm store directory
         id: pnpm-cache
         run: |
-          set -e
-          pnpm_cache_dir="$(pnpm store path)"
-          if [ $? -ne 0 ]; then
-            echo "Failed to get pnpm cache directory." >&2
-            exit 1
-          fi
-          echo "PNPM_CACHE_DIR=$pnpm_cache_dir" >> $GITHUB_ENV
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
 
       - uses: actions/cache@v3
         name: Setup pnpm cache
