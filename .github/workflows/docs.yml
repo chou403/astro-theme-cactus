@@ -5,9 +5,7 @@ on:
     branches:
       - main
 
-concurrency:
-  group: ${{ github.workflow }}
-  cancel-in-progress: true
+concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 permissions:
   contents: read
@@ -16,9 +14,8 @@ permissions:
 
 jobs:
   release:
-    name: Build and Deploy Docs with Astro
+    name: Build Docs / astro
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -26,25 +23,38 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'pnpm'
+          node-version: 18.18.0
 
-      - name: Install pnpm
-        run: npm install -g pnpm@latest
+      - uses: pnpm/action-setup@v2.0.1
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8.9.2
+          run_install: false
 
-      - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
 
-      - name: Build Astro Site
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build Astro site
         run: pnpm run build
 
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: peaceiris/actions-gh-pages@v4
         with:
           personal_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: docs
-          keep_files: true
-          commit_message: 'Deploy Docs: ${GITHUB_SHA}'
           force_orphan: true
