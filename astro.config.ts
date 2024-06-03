@@ -13,9 +13,11 @@ import { remarkReadingTime } from "./src/utils/remark-reading-time";
 
 // https://astro.build/config
 export default defineConfig({
+  base: '/astro-theme-cactus',
 	image: {
 		domains: ["webmention.io"],
 	},
+
 	integrations: [
 		expressiveCode(expressiveCodeOptions),
 		icon(),
@@ -25,6 +27,7 @@ export default defineConfig({
 		sitemap(),
 		mdx(),
 	],
+
 	markdown: {
 		rehypePlugins: [
 			[
@@ -45,7 +48,7 @@ export default defineConfig({
 	// https://docs.astro.build/en/guides/prefetch/
 	prefetch: true,
 	// ! Please remember to replace the following site property with your own domain
-	site: "https://astro-cactus.chriswilliams.dev/",
+  site: 'https://chou401.github.io/',
 	vite: {
 		optimizeDeps: {
 			exclude: ["@resvg/resvg-js"],

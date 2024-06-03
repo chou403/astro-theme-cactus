@@ -25,14 +25,14 @@ export const siteConfig: SiteConfig = {
 	title: "知道的越多,才知知道的越少",
 	webmentions: {
 		// Webmention.io API endpoint. Get your own here: https://webmention.io/, and follow this blog post: https://astro-cactus.chriswilliams.dev/posts/webmentions/
-		link: "https://webmention.io/astro-cactus.chriswilliams.dev/webmention",
+		link: "http://localhost:4321/astro-theme-cactus/",
 	},
 };
 
 // Used to generate links in both the Header & Footer.
 export const menuLinks: { path: string; title: string }[] = [
 	{
-		path: "/",
+		path: "/astro-theme-cactus/",
 		title: "Home",
 	},
 	// {
@@ -40,7 +40,7 @@ export const menuLinks: { path: string; title: string }[] = [
 	// 	title: "About",
 	// },
 	{
-		path: "/posts/",
+		path: "/astro-theme-cactus/posts/",
 		title: "Blog",
 	},
 ];
