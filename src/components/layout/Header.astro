@@ -10,9 +10,9 @@ const url = new URL(Astro.request.url);
 <header class="group relative mb-8 flex items-center sm:ps-[3.5rem]" id="main-header">
 	<div class="flex sm:flex-col">
 		<a
-			aria-current={url.pathname === "/astro-theme-cactus/" ? "page" : false}
+			aria-current={url.pathname === "/" ? "page" : false}
 			class="inline-flex items-center grayscale hover:filter-none sm:relative sm:inline-block"
-			href="/"
+			href="/astro-theme-cactus/"
 		>
 			<svg
 				aria-hidden="true"
